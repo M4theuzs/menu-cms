@@ -1,5 +1,30 @@
+import { useState } from 'react';
+import { FeedbackProvider } from '@/components/common/feedback';
+import { PageHeader } from '@/components/common/page-header';
+import { EmptyState } from '@/components/common/page-state';
+import { CmsLayout } from '@/components/layout/cms-layout';
+import type { Section } from '@/components/layout/sidebar';
+
+const TITLES: Record<Section, string> = {
+  categories: 'Categorias',
+  products: 'Produtos',
+  spots: 'Mesas',
+  'guest-checks': 'Comandas em aberto',
+  kanban: 'Kanban de pedidos',
+};
+
 function App() {
-  return <h1 className="p-6 text-2xl font-semibold">Menu CMS</h1>;
+  const [section, setSection] = useState<Section>('categories');
+
+  return (
+    <FeedbackProvider>
+      <CmsLayout current={section} onChange={setSection}>
+        {/* as páginas de verdade entram nos próximos dias */}
+        <PageHeader title={TITLES[section]} />
+        <EmptyState message="Em construção." />
+      </CmsLayout>
+    </FeedbackProvider>
+  );
 }
 
 export default App;
