@@ -4,6 +4,7 @@ import { PageHeader } from '@/components/common/page-header';
 import { EmptyState } from '@/components/common/page-state';
 import { CmsLayout } from '@/components/layout/cms-layout';
 import type { Section } from '@/components/layout/sidebar';
+import { CategoriesPage } from '@/pages/categories-page';
 
 const TITLES: Record<Section, string> = {
   categories: 'Categorias',
@@ -19,9 +20,15 @@ function App() {
   return (
     <FeedbackProvider>
       <CmsLayout current={section} onChange={setSection}>
-        {/* as páginas de verdade entram nos próximos dias */}
-        <PageHeader title={TITLES[section]} />
-        <EmptyState message="Em construção." />
+        {section === 'categories' && <CategoriesPage />}
+
+        {/* as outras páginas entram nos próximos dias */}
+        {section !== 'categories' && (
+          <>
+            <PageHeader title={TITLES[section]} />
+            <EmptyState message="Em construção." />
+          </>
+        )}
       </CmsLayout>
     </FeedbackProvider>
   );
