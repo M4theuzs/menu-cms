@@ -5,6 +5,7 @@ import { EmptyState } from '@/components/common/page-state';
 import { CmsLayout } from '@/components/layout/cms-layout';
 import type { Section } from '@/components/layout/sidebar';
 import { CategoriesPage } from '@/pages/categories-page';
+import { ProductsPage } from '@/pages/products-page';
 import { SpotsPage } from '@/pages/spots-page';
 
 const TITLES: Record<Section, string> = {
@@ -22,10 +23,11 @@ function App() {
     <FeedbackProvider>
       <CmsLayout current={section} onChange={setSection}>
         {section === 'categories' && <CategoriesPage />}
+        {section === 'products' && <ProductsPage />}
         {section === 'spots' && <SpotsPage />}
 
         {/* as outras páginas entram nos próximos dias */}
-        {(section === 'products' || section === 'guest-checks' || section === 'kanban') && (
+        {(section === 'guest-checks' || section === 'kanban') && (
           <>
             <PageHeader title={TITLES[section]} />
             <EmptyState message="Em construção." />
