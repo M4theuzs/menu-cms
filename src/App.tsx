@@ -5,16 +5,9 @@ import { EmptyState } from '@/components/common/page-state';
 import { CmsLayout } from '@/components/layout/cms-layout';
 import type { Section } from '@/components/layout/sidebar';
 import { CategoriesPage } from '@/pages/categories-page';
+import { GuestChecksPage } from '@/pages/guest-checks-page';
 import { ProductsPage } from '@/pages/products-page';
 import { SpotsPage } from '@/pages/spots-page';
-
-const TITLES: Record<Section, string> = {
-  categories: 'Categorias',
-  products: 'Produtos',
-  spots: 'Mesas',
-  'guest-checks': 'Comandas em aberto',
-  kanban: 'Kanban de pedidos',
-};
 
 function App() {
   const [section, setSection] = useState<Section>('categories');
@@ -25,11 +18,12 @@ function App() {
         {section === 'categories' && <CategoriesPage />}
         {section === 'products' && <ProductsPage />}
         {section === 'spots' && <SpotsPage />}
+        {section === 'guest-checks' && <GuestChecksPage />}
 
-        {/* as outras páginas entram nos próximos dias */}
-        {(section === 'guest-checks' || section === 'kanban') && (
+        {/* o Kanban (bônus) entra no último dia */}
+        {section === 'kanban' && (
           <>
-            <PageHeader title={TITLES[section]} />
+            <PageHeader title="Kanban de pedidos" />
             <EmptyState message="Em construção." />
           </>
         )}
